@@ -46,7 +46,6 @@ EOF_ASCII_ART
 }
 
 ingresar() {
-  echo -e "[-]${cyan}Ingrsando a la carpeta nmap${reset}"
   sleep 1
   echo ""
   cd $folder/nmap
@@ -71,6 +70,12 @@ escaneo_servicios() {
   nmap -p$ports -sCV $ip -oN targeted
 }
 
+escaneo_de_vulneravilidades() {
+  echo -e "${cyan}[-] Escaneo de Vulneravildades${reset}"
+  sleep 1
+  nmap --script vuln $ip -v
+}
+
 if [[ $# -eq 0 ]]; then
   echo -e "${red} [!] Debe de proporcionar una dirección ip ${reset}"
   echo -e "${green}Uso: $0 [ip] ${reset}"
@@ -86,6 +91,7 @@ ingresar
 ping
 escaneo_puertos
 escaneo_servicios
+escaneo_de_vulneravilidades
 echo ""
 sleep 1
 echo -e "${green}[-] Escaneo finalizado ${reset}"
